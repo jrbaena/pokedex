@@ -17,31 +17,69 @@ class Home extends StatelessWidget {
           padding: const EdgeInsets.only(left: 16.0),
           child: Image.asset('assets/images/icons/pokeball.png'),
         ),
-        actions: [IconButton(onPressed: () {
-          showDialog(context: context, builder: (BuildContext context) => _getPokeDialog());
-        }, icon: const Icon(Icons.filter_hdr), padding: EdgeInsets.only(right: 16.0),)],
+        actions: [
+          IconButton(
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) => _getPokeDialog());
+            },
+            icon: const Icon(Icons.filter_hdr),
+            padding: EdgeInsets.only(right: 16.0),
+          )
+        ],
       ),
       body: SafeArea(
         child: ListView(
           children: [
-            SizedBox(height: 25,),
-            Container(height: 60, color: Colors.pink,),
-            SizedBox(height: 25,),
-            Container(height: 60, color: Colors.blue,),
-            SizedBox(height: 25,),
-            Container(height: 60, color: Colors.pink,),
-            SizedBox(height: 25,),
-            Container(height: 60, color: Colors.blue,),
-            SizedBox(height: 25,),
-            Container(height: 60, color: Colors.pink,),
-            SizedBox(height: 25,),
-            Container(height: 60, color: Colors.blue,),
+            SizedBox(
+              height: 25,
+            ),
+            Container(
+              height: 60,
+              color: Colors.pink,
+            ),
+            SizedBox(
+              height: 25,
+            ),
+            Container(
+              height: 60,
+              color: Colors.blue,
+            ),
+            SizedBox(
+              height: 25,
+            ),
+            Container(
+              height: 60,
+              color: Colors.pink,
+            ),
+            SizedBox(
+              height: 25,
+            ),
+            Container(
+              height: 60,
+              color: Colors.blue,
+            ),
+            SizedBox(
+              height: 25,
+            ),
+            Container(
+              height: 60,
+              color: Colors.pink,
+            ),
+            SizedBox(
+              height: 25,
+            ),
+            Container(
+              height: 60,
+              color: Colors.blue,
+            ),
           ],
         ),
       ),
     );
   }
-  
+
   Widget _getPokeDialog() {
     return Dialog(
       backgroundColor: Colors.white,
@@ -52,7 +90,9 @@ class Home extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text('HOLA SOY UN POKEMON'),
-            SizedBox(height: 25,),
+            SizedBox(
+              height: 25,
+            ),
             Text('Otro texto')
           ],
         ),

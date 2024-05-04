@@ -1,13 +1,16 @@
-import 'package:pokedex/core/utils/enums.dart';
-
 class Pokemon {
-  final int id;
   final String name;
-  final PokemonType type;
+  final String url;
 
   Pokemon({
-    required this.id,
     required this.name,
-    required this.type,
+    required this.url,
   });
+
+  factory Pokemon.fromJson(Map<String, dynamic> json) {
+    return Pokemon(
+      name: json['name'],
+      url: json['url'],
+    );
+  }
 }
