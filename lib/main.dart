@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/home.dart';
+import 'package:pokedex/home/home.dart';
 
 void main() {
   runApp(const MyApp());
