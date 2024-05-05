@@ -16,8 +16,7 @@ class App extends StatelessWidget {
         useMaterial3: true,
       ),
       home: RepositoryProvider(
-          create: (context) => PokemonRepositoryImpl(),
-          child: const Home()),
+          create: (context) => PokemonRepositoryImpl(), child: const Home()),
     );
   }
 }

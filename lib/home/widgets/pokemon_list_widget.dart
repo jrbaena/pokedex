@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/detail/pokemon_detail_page.dart';
@@ -19,29 +20,65 @@ class PokemonListWidget extends StatelessWidget {
         if (state is LoadedHomeState) {
           final pokemonList = state.pokemonList;
           return ListView.builder(
-              itemCount: pokemonList.length,
-              itemBuilder: (context, index) {
-                final pokemon = pokemonList[index];
-                return InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const PokemonDetailPage()),
-                    );
-                  },
-                  child: ListTile(
-                      leading: const Icon(Icons.list),
-                      trailing: Text(
-                        pokemon.name,
-                        style: TextStyle(color: Colors.green, fontSize: 15),
+            itemCount: pokemonList.length,
+            itemBuilder: (context, index) {
+              final pokemon = pokemonList[index];
+              return InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            PokemonDetailPage(pokemon: pokemon)),
+                  );
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CachedNetworkImage(
+                        imageUrl: pokemon.frontProfileImage,
+                        width: 60,
+                        height: 60,
+                        placeholder: (context, url) => const SizedBox(
+                            height: 15,
+                            width: 15,
+                            child: Center(child: CircularProgressIndicator())),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
                       ),
-                      title: Text("List item $index")),
-                );
-              });
+                      const SizedBox(
+                        width: 25,
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            Text(
+                              pokemon.name,
+                              style: const TextStyle(
+                                  color: Colors.black, fontSize: 18),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            const Divider(),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
         }
         return Container();
       },
     );
   }
-
 }

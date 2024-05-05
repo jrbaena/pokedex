@@ -1,5 +1,5 @@
-import '../domain/pokemon.dart';
+import '../domain/pokemon_detail_item.dart';
 
 abstract class PokemonRepository {
-  Future<List<Pokemon>> fetch();
+  Future<List<PokemonDetailItem>> fetch();
 }

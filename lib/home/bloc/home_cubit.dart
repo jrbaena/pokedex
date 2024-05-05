@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pokedex/home/domain/pokemon.dart';
+import 'package:pokedex/home/domain/pokemon_detail_item.dart';
+import 'package:pokedex/home/domain/pokemon_item.dart';
 import 'package:pokedex/home/repositories/pokemon_repository.dart';
 
 part 'home_state.dart';

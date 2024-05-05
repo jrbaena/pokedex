@@ -17,13 +17,13 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    _homeCubit = HomeCubit(RepositoryProvider.of<PokemonRepositoryImpl>(context));
+    _homeCubit =
+        HomeCubit(RepositoryProvider.of<PokemonRepositoryImpl>(context));
     _homeCubit.init();
   }
 
   @override
   Widget build(BuildContext context) {
-
     return BlocProvider(
       create: (context) => _homeCubit,
       child: Scaffold(
@@ -45,7 +45,7 @@ class _HomeState extends State<Home> {
                     context: context,
                     builder: (BuildContext context) => _getPokeDialog());
               },
-              icon: const Icon(Icons.filter_hdr),
+              icon: const Icon(Icons.wifi),
               padding: const EdgeInsets.only(right: 16.0),
             )
           ],
