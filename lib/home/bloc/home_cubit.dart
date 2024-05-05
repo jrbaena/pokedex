@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pokedex/home/domain/pokemon.dart';
+import 'package:pokedex/home/repositories/pokemon_repository.dart';
 
 part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit() : super(InitialHomeState());
+  HomeCubit(this._pokemonRepository) : super(InitialHomeState());
+
+  final PokemonRepository _pokemonRepository;
+
+  init() async {
+    final pokemonList = await _pokemonRepository.fetch();
+    emit(LoadedHomeState(pokemonList));
+  }
 }

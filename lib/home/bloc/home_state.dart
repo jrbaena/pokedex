@@ -7,6 +7,10 @@ class InitialHomeState extends HomeState {}
 
 class LoadingHomeState extends HomeState {}
 
-class LoadedHomeState extends HomeState {}
+class LoadedHomeState extends HomeState {
+  final List<Pokemon> pokemonList;
+
+  LoadedHomeState(this.pokemonList);
+}
 
 class ErrorHomeState extends HomeState {}

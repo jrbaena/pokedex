@@ -8,16 +8,13 @@ import 'pokemon_repository.dart';
 
 class PokemonRepositoryImpl extends PokemonRepository {
   @override
-  Future<List<Pokemon>> fetch(String url) async {
-    var url = Uri.https(Config.baseUrl);
-    // Await the http get response, then decode the json-formatted response.
+  Future<List<Pokemon>> fetch() async {
+    var url = Uri.parse(Config.baseUrl);
     var response = await http.get(url);
     if (response.statusCode == 200) {
+      final results = jsonDecode(response.body)['results'];
       final pokemonList =
-          (jsonDecode(response.body) as Map<String, Map<String, dynamic>>)
-              .values
-              .map<Pokemon>((value) => Pokemon.fromJson(value))
-              .toList();
+          results.map<Pokemon>((value) => Pokemon.fromJson(value)).toList();
       return pokemonList;
     } else {
       throw Exception();
