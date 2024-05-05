@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pokedex/detail/pokemon_detail_page.dart';
 import 'package:pokedex/home/bloc/home_cubit.dart';
 
 class PokemonListWidget extends StatelessWidget {
@@ -21,13 +22,21 @@ class PokemonListWidget extends StatelessWidget {
               itemCount: pokemonList.length,
               itemBuilder: (context, index) {
                 final pokemon = pokemonList[index];
-                return ListTile(
-                    leading: const Icon(Icons.list),
-                    trailing: Text(
-                      pokemon.name,
-                      style: TextStyle(color: Colors.green, fontSize: 15),
-                    ),
-                    title: Text("List item $index"));
+                return InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const PokemonDetailPage()),
+                    );
+                  },
+                  child: ListTile(
+                      leading: const Icon(Icons.list),
+                      trailing: Text(
+                        pokemon.name,
+                        style: TextStyle(color: Colors.green, fontSize: 15),
+                      ),
+                      title: Text("List item $index")),
+                );
               });
         }
         return Container();
