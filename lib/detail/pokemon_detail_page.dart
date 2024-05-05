@@ -11,12 +11,16 @@ class PokemonDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        shadowColor: Colors.black.withOpacity(0.75),
+        surfaceTintColor: Colors.white,
+        elevation: 7.5,
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
           icon: const Icon(Icons.arrow_back_ios_new),
         ),
+        title: Text(pokemon.name),
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -25,7 +29,7 @@ class PokemonDetailPage extends StatelessWidget {
           shadowColor: Colors.black.withOpacity(0.5),
           elevation: 15,
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 35),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,7 +62,7 @@ class PokemonDetailPage extends StatelessWidget {
                   ],
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 35,
                 ),
                 Text(pokemon.type.name),
                 SizedBox(
@@ -66,7 +70,7 @@ class PokemonDetailPage extends StatelessWidget {
                 ),
                 Text(pokemon.name),
                 SizedBox(
-                  height: 20,
+                  height: 30,
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 16),
