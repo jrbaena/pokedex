@@ -11,11 +11,15 @@ class HomeCubit extends Cubit<HomeState> {
 
   final PokemonRepository _pokemonRepository;
 
-  init() async {
+  void init() async {
     emit(LoadingHomeState());
     final pokemonList = await _pokemonRepository.fetch();
     final pokemonTypeList = await _pokemonRepository.fetchTypes();
     emit(LoadedHomeState(pokemonList: pokemonList, pokemonTypeList: pokemonTypeList));
+  }
+
+  void reload() {
+    init();
   }
 
   getPokemonListFromType(String urlType) async {

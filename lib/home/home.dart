@@ -36,9 +36,12 @@ class _HomeState extends State<Home> {
           elevation: 12.5,
           leadingWidth: 51.0,
           toolbarHeight: 65,
-          leading: Container(
-            padding: const EdgeInsets.only(left: 16.0),
-            child: Image.asset('assets/images/icons/pokeball.png'),
+          leading: InkWell(
+            onTap: () => _homeCubit.reload(),
+            child: Container(
+              padding: const EdgeInsets.only(left: 16.0),
+              child: Image.asset('assets/images/icons/pokeball.png'),
+            ),
           ),
           actions: [
             IconButton(
