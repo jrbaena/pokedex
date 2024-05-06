@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/home/domain/pokemon_type.dart';
+import 'package:pokedex/home/domain/models/pokemon_type.dart';
 
 class PokemonTypesFilterDialog extends StatelessWidget {
   const PokemonTypesFilterDialog({super.key, required this.pokemonTypeList});

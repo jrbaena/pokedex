@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/home/bloc/home_cubit.dart';
-import 'package:pokedex/home/repositories/pokemon_respository_impl.dart';
-import 'package:pokedex/home/widgets/pokemon_appbar_widget.dart';
-import 'package:pokedex/home/widgets/pokemon_list_widget.dart';
+import 'package:pokedex/home/data/repositories/pokemon_respository_impl.dart';
+import 'package:pokedex/home/ui/widgets/pokemon_appbar_widget.dart';
+import 'package:pokedex/home/ui/widgets/pokemon_list_widget.dart';
 
 class PokemonHomePage extends StatefulWidget {
   const PokemonHomePage({super.key});

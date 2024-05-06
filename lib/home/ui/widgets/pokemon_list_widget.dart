@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pokedex/home/pokemon_detail_page.dart';
+import 'package:pokedex/home/ui/pokemon_detail_page.dart';
 import 'package:pokedex/home/bloc/home_cubit.dart';
 
 class PokemonListWidget extends StatelessWidget {

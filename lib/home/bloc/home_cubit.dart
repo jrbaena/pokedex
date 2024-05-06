@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:pokedex/home/domain/pokemon_detail_item.dart';
-import 'package:pokedex/home/domain/pokemon_type.dart';
-import 'package:pokedex/home/repositories/pokemon_repository.dart';
+import 'package:pokedex/home/domain/models/pokemon_detail_item.dart';
+import 'package:pokedex/home/domain/models/pokemon_type.dart';
+import 'package:pokedex/home/domain/repositories/pokemon_repository.dart';
 
 part 'home_state.dart';
 

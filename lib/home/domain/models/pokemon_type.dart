@@ -1,5 +1,5 @@
-import 'package:pokedex/home/domain/pokemon_detail_item.dart';
-import 'package:pokedex/home/domain/pokemon_item.dart';
+import 'package:pokedex/home/domain/models/pokemon_detail_item.dart';
+import 'package:pokedex/home/domain/models/pokemon_item.dart';
 
 class PokemonTypeListItem {
   final String nextList;

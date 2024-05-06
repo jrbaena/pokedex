@@ -3,13 +3,14 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pokedex/core/config/config.dart';
-import 'package:pokedex/home/domain/pokemon_detail_item.dart';
-import 'package:pokedex/home/domain/pokemon_item.dart';
+import 'package:pokedex/home/domain/models/pokemon_detail_item.dart';
+import 'package:pokedex/home/domain/models/pokemon_item.dart';
 import 'package:http/http.dart' as http;
-import 'package:pokedex/home/domain/pokemon_list_item.dart';
-import 'package:pokedex/home/domain/pokemon_type.dart';
+import 'package:pokedex/home/domain/models/pokemon_list_item.dart';
+import 'package:pokedex/home/domain/models/pokemon_type.dart';
+import 'package:pokedex/home/domain/repositories/pokemon_repository.dart';
 
-import 'pokemon_repository.dart';
+
 
 class PokemonRepositoryImpl extends PokemonRepository {
   @override

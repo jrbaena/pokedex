@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/home/bloc/home_cubit.dart';
-import 'package:pokedex/home/domain/pokemon_type.dart';
-import 'package:pokedex/home/widgets/pokemon_types_filter_dialog.dart';
+import 'package:pokedex/home/domain/models/pokemon_type.dart';
+import 'package:pokedex/home/ui/widgets/pokemon_types_filter_dialog.dart';
 
 class PokemonAppBarWidget extends StatelessWidget
     implements PreferredSizeWidget {

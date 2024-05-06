@@ -1,6 +1,6 @@
-import '../domain/pokemon_detail_item.dart';
-import '../domain/pokemon_list_item.dart';
-import '../domain/pokemon_type.dart';
+import '../models/pokemon_detail_item.dart';
+import '../models/pokemon_list_item.dart';
+import '../models/pokemon_type.dart';
 
 abstract class PokemonRepository {
   Future<PokemonListItem> fetch({String? nextUrlToLoad});

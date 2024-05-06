@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pokedex/home/pokemon_home_page.dart';
-import 'home/repositories/pokemon_respository_impl.dart';
+import 'package:pokedex/home/ui/pokemon_home_page.dart';
+import 'home/data/repositories/pokemon_respository_impl.dart';
 
 class App extends StatelessWidget {
   const App({super.key});

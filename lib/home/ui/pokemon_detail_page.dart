@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:pokedex/home/domain/pokemon_detail_item.dart';
+import 'package:pokedex/home/domain/models/pokemon_detail_item.dart';
 
 class PokemonDetailPage extends StatelessWidget {
   const PokemonDetailPage({super.key, required this.pokemon});

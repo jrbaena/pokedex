@@ -1,4 +1,4 @@
-import 'package:pokedex/home/domain/pokemon_detail_item.dart';
+import 'package:pokedex/home/domain/models/pokemon_detail_item.dart';
 
 class PokemonListItem {
   final String nextUrl;
