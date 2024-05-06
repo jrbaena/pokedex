@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pokedex/home/domain/pokemon_detail_item.dart';
 import 'package:pokedex/home/domain/pokemon_type.dart';
 import 'package:pokedex/home/repositories/pokemon_repository.dart';
@@ -32,6 +33,18 @@ class HomeCubit extends Cubit<HomeState> {
     emit(LoadingHomeState(type: pokemonTypeSelected.name));
     final pokemonList = await _pokemonRepository
         .fetchPokemonListByType(pokemonTypeSelected.url);
+    if (pokemonList.isEmpty) {
+      Fluttertoast.showToast(
+          msg: "No hay ningún pokemon de ese tipo en base de datos",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+      init();
+      return;
+    }
     emit(LoadedHomeState(
       pokemonList: pokemonList,
       pokemonTypeList: pokemonTypeList,
