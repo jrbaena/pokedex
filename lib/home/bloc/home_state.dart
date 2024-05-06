@@ -5,7 +5,11 @@ abstract class HomeState {}
 
 class InitialHomeState extends HomeState {}
 
-class LoadingHomeState extends HomeState {}
+class LoadingHomeState extends HomeState {
+  final String? type;
+
+  LoadingHomeState({this.type});
+}
 
 class LoadedHomeState extends HomeState {
   //Objeto pokemon con lo necesario pa mostrar, incluyendo url de siguiente
