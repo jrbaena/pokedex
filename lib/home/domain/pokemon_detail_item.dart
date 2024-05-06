@@ -17,8 +17,8 @@ class PokemonDetailItem {
   factory PokemonDetailItem.fromJson(Map<String, dynamic> json) {
     return PokemonDetailItem(
       name: json['name'],
-      frontProfileImage: json['sprites']['front_default'],
-      backProfileImage: json['sprites']['back_default'],
+      frontProfileImage: json['sprites']['front_default'] ?? '',
+      backProfileImage: json['sprites']['back_default'] ?? '',
       type: TypeItem.fromJson(json['types'][0]["type"]),
       height: (json['height'] as int) / 10,
       weight: json['weight'],

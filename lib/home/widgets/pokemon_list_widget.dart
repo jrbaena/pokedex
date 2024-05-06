@@ -16,7 +16,15 @@ class PokemonListWidget extends StatelessWidget {
       bloc: homeCubit,
       builder: (context, state) {
         if (state is ErrorHomeState) {}
-        if (state is LoadingHomeState) {}
+        if (state is LoadingHomeState) {
+          return const Center(
+            child: SizedBox(
+              height: 50,
+              width: 50,
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
         if (state is LoadedHomeState) {
           final pokemonList = state.pokemonList;
           return ListView.builder(

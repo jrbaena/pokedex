@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/home/bloc/home_cubit.dart';
+import 'package:pokedex/home/domain/pokemon_type.dart';
 import 'package:pokedex/home/repositories/pokemon_respository_impl.dart';
 import 'package:pokedex/home/widgets/pokemon_list_widget.dart';
+import 'package:pokedex/home/widgets/pokemon_types_filter_dialog.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -40,10 +42,16 @@ class _HomeState extends State<Home> {
           ),
           actions: [
             IconButton(
-              onPressed: () {
-                showDialog(
+              onPressed: () async {
+                final PokemonTypeItem pokemonSelected = await showDialog(
                     context: context,
-                    builder: (BuildContext context) => _getPokeDialog());
+                    builder: (BuildContext context) {
+                      if (_homeCubit.state is LoadedHomeState) {
+                        return PokemonTypesFilterDialog( pokemonTypeList: (_homeCubit.state as LoadedHomeState).pokemonTypeList ?? []);
+                      }
+                      return Container();
+                    },);
+                _homeCubit.getPokemonListFromType(pokemonSelected.url);
               },
               icon: const Icon(Icons.wifi),
               padding: const EdgeInsets.only(right: 16.0),
@@ -52,26 +60,6 @@ class _HomeState extends State<Home> {
         ),
         body: const SafeArea(
           child: PokemonListWidget(),
-        ),
-      ),
-    );
-  }
-
-  Widget _getPokeDialog() {
-    return Dialog(
-      backgroundColor: Colors.white,
-      alignment: Alignment.center,
-      child: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text('HOLA SOY UN POKEMON'),
-            SizedBox(
-              height: 25,
-            ),
-            Text('Otro texto')
-          ],
         ),
       ),
     );
