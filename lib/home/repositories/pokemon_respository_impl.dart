@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pokedex/core/config/config.dart';
 import 'package:pokedex/home/domain/pokemon_detail_item.dart';
 import 'package:pokedex/home/domain/pokemon_item.dart';
@@ -27,7 +29,8 @@ class PokemonRepositoryImpl extends PokemonRepository {
       for (var pokemonItem in pokemonItemList) {
         pokemonDetailList.add(await fetchPokemonDetail(pokemonItem.url));
       }
-      return PokemonListItem(nextUrl: nextUrl, pokemonDetailList: pokemonDetailList);
+      return PokemonListItem(
+          nextUrl: nextUrl, pokemonDetailList: pokemonDetailList);
     } else {
       throw Exception();
     }
@@ -67,7 +70,14 @@ class PokemonRepositoryImpl extends PokemonRepository {
             final result = jsonDecode(responseItem.body);
             pokemonDetailList.add(PokemonDetailItem.fromJson(result));
           } on Exception catch (e) {
-            print(e);
+            Fluttertoast.showToast(
+                msg: "[Error]: $e",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.red,
+                textColor: Colors.white,
+                fontSize: 16.0);
           }
         } else {
           throw Exception();

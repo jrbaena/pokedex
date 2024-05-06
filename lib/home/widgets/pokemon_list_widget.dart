@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/detail/pokemon_detail_page.dart';
@@ -34,7 +33,8 @@ class PokemonListWidget extends StatelessWidget {
             onNotification: (ScrollNotification scrollNotification) {
               if (scrollNotification.metrics.pixels ==
                       scrollNotification.metrics.maxScrollExtent &&
-                  !isRequested && !isFilteringByType) {
+                  !isRequested &&
+                  !isFilteringByType) {
                 homeCubit.next();
                 isRequested = true;
                 return true;
@@ -48,7 +48,13 @@ class PokemonListWidget extends StatelessWidget {
                   child: Positioned(
                     bottom: 20,
                     left: (MediaQuery.of(context).size.width / 2) - 17.5,
-                    child: Center(child: SizedBox(height: 35, width: 35, child: CircularProgressIndicator(color: Colors.blueGrey.withOpacity(0.5),))),
+                    child: Center(
+                        child: SizedBox(
+                            height: 35,
+                            width: 35,
+                            child: CircularProgressIndicator(
+                              color: Colors.blueGrey.withOpacity(0.5),
+                            ))),
                   ),
                 ),
                 ListView.builder(

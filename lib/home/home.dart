@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/home/bloc/home_cubit.dart';
-import 'package:pokedex/home/domain/pokemon_type.dart';
 import 'package:pokedex/home/repositories/pokemon_respository_impl.dart';
 import 'package:pokedex/home/widgets/pokemon_appbar_widget.dart';
 import 'package:pokedex/home/widgets/pokemon_list_widget.dart';
-import 'package:pokedex/home/widgets/pokemon_types_filter_dialog.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -29,9 +27,9 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => _homeCubit,
-      child: Scaffold(
+      child: const Scaffold(
         appBar: PokemonAppBarWidget(),
-        body: const SafeArea(
+        body: SafeArea(
           child: PokemonListWidget(),
         ),
       ),

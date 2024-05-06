@@ -61,36 +61,36 @@ class PokemonDetailPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 35,
                 ),
                 Text(pokemon.type.name),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Text(pokemon.name),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 16),
+                  padding: const EdgeInsets.only(left: 16),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Row(
                         children: [
-                          Icon(Icons.balance),
+                          const Icon(Icons.balance),
                           Text('Peso: ${pokemon.weight} kg'),
                         ],
                       ),
-                      Divider(),
+                      const Divider(),
                       Row(
                         children: [
-                          Icon(Icons.height),
+                          const Icon(Icons.height),
                           Text('Altura: ${pokemon.height} m'),
                         ],
                       ),
-                      Divider(),
+                      const Divider(),
                     ],
                   ),
                 )
