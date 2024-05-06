@@ -13,9 +13,14 @@ class HomeCubit extends Cubit<HomeState> {
 
   void init() async {
     emit(LoadingHomeState());
-    final pokemonList = await _pokemonRepository.fetch();
+    final pokemonListItem = await _pokemonRepository.fetch();
     final pokemonTypeList = await _pokemonRepository.fetchTypes();
-    emit(LoadedHomeState(pokemonList: pokemonList, pokemonTypeList: pokemonTypeList));
+    emit(LoadedHomeState(
+      pokemonList: pokemonListItem.pokemonDetailList,
+      pokemonTypeList: pokemonTypeList,
+      nextUrl: pokemonListItem.nextUrl,
+      isRequested: false,
+    ));
   }
 
   void reload() {
@@ -25,14 +30,24 @@ class HomeCubit extends Cubit<HomeState> {
   getPokemonListFromType(String urlType) async {
     final pokemonTypeList = (state as LoadedHomeState).pokemonTypeList;
     emit(LoadingHomeState());
-    final pokemonList = await _pokemonRepository.fetchPokemonListByType(urlType);
-    emit(LoadedHomeState(pokemonList: pokemonList, pokemonTypeList: pokemonTypeList));
+    final pokemonList =
+        await _pokemonRepository.fetchPokemonListByType(urlType);
+    emit(LoadedHomeState(
+        pokemonList: pokemonList, pokemonTypeList: pokemonTypeList, isRequested: false));
   }
 
   void next() async {
-    emit(LoadingHomeState());
-    final pokemonList = await _pokemonRepository.fetch(nextUrl: '');
-    final pokemonTypeList = await _pokemonRepository.fetchTypes();
-    emit(LoadedHomeState(pokemonList: pokemonList, pokemonTypeList: pokemonTypeList));
+    if (state is! LoadedHomeState) {
+      return;
+    }
+    emit((state as LoadedHomeState).copyWith(isRequested: true));
+    List<PokemonDetailItem> currentPokemonList =
+        (state as LoadedHomeState).pokemonList;
+    final nextUrl = (state as LoadedHomeState).nextUrl;
+    final pokemonListItem =
+        await _pokemonRepository.fetch(nextUrlToLoad: nextUrl);
+    currentPokemonList.addAll(pokemonListItem.pokemonDetailList);
+    emit((state as LoadedHomeState).copyWith(
+        pokemonList: currentPokemonList, nextUrl: pokemonListItem.nextUrl, isRequested: false));
   }
 }

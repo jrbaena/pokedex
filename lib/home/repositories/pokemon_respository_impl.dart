@@ -4,32 +4,30 @@ import 'package:pokedex/core/config/config.dart';
 import 'package:pokedex/home/domain/pokemon_detail_item.dart';
 import 'package:pokedex/home/domain/pokemon_item.dart';
 import 'package:http/http.dart' as http;
+import 'package:pokedex/home/domain/pokemon_list_item.dart';
 import 'package:pokedex/home/domain/pokemon_type.dart';
 
 import 'pokemon_repository.dart';
 
 class PokemonRepositoryImpl extends PokemonRepository {
   @override
-  Future<List<PokemonDetailItem>> fetch({String? nextUrl}) async {
-    var url = nextUrl != null && nextUrl.isEmpty ? Uri.parse(nextUrl) : Uri.parse(Config.baseUrl);
+  Future<PokemonListItem> fetch({String? nextUrlToLoad}) async {
+    var url = nextUrlToLoad != null && nextUrlToLoad.isNotEmpty
+        ? Uri.parse(nextUrlToLoad)
+        : Uri.parse(Config.baseUrl);
     var response = await http.get(url);
     if (response.statusCode == 200) {
-      final results = jsonDecode(response.body)['results'];
+      final data = jsonDecode(response.body);
+      final nextUrl = data['next'];
+      final results = data['results'];
       final List<PokemonItem> pokemonItemList = results
           .map<PokemonItem>((value) => PokemonItem.fromJson(value))
           .toList();
       List<PokemonDetailItem> pokemonDetailList = [];
       for (var pokemonItem in pokemonItemList) {
-        var urlDetail = Uri.parse(pokemonItem.url);
-        var responseItem = await http.get(urlDetail);
-        if (response.statusCode == 200) {
-          final result = jsonDecode(responseItem.body);
-          pokemonDetailList.add(PokemonDetailItem.fromJson(result));
-        } else {
-          throw Exception();
-        }
+        pokemonDetailList.add(await fetchPokemonDetail(pokemonItem.url));
       }
-      return pokemonDetailList;
+      return PokemonListItem(nextUrl: nextUrl, pokemonDetailList: pokemonDetailList);
     } else {
       throw Exception();
     }
@@ -76,6 +74,18 @@ class PokemonRepositoryImpl extends PokemonRepository {
         }
       }
       return pokemonDetailList;
+    } else {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<PokemonDetailItem> fetchPokemonDetail(String url) async {
+    var urlDetail = Uri.parse(url);
+    var response = await http.get(urlDetail);
+    if (response.statusCode == 200) {
+      final result = jsonDecode(response.body);
+      return PokemonDetailItem.fromJson(result);
     } else {
       throw Exception();
     }

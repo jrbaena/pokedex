@@ -13,18 +13,32 @@ class LoadedHomeState extends HomeState {
   final List<PokemonDetailItem> pokemonList;
   final List<PokemonTypeItem>? pokemonTypeList;
   final String? nextUrl;
+  final bool isRequested;
 
-  LoadedHomeState({required this.pokemonList, this.pokemonTypeList, this.nextUrl});
+  LoadedHomeState({required this.pokemonList, this.pokemonTypeList, this.nextUrl, required this.isRequested});
 
   LoadedHomeState copyWith({
     List<PokemonDetailItem>? pokemonList,
     List<PokemonTypeItem>? pokemonTypeList,
     String? nextUrl,
+    required bool isRequested,
   }) {
     return LoadedHomeState(
       pokemonList: pokemonList ?? this.pokemonList,
       pokemonTypeList: pokemonTypeList ?? this.pokemonTypeList,
       nextUrl: nextUrl ?? this.nextUrl,
+      isRequested: isRequested,
+    );
+  }
+
+  LoadedHomeState copyWithRequest({
+    required bool isRequested,
+  }) {
+    return LoadedHomeState(
+      pokemonList: pokemonList,
+      pokemonTypeList: pokemonTypeList,
+      nextUrl: nextUrl,
+      isRequested: isRequested,
     );
   }
 }
