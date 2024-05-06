@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/home/domain/pokemon_detail_item.dart';
-import 'package:pokedex/home/domain/pokemon_item.dart';
+import 'package:pokedex/home/domain/pokemon_type.dart';
 import 'package:pokedex/home/repositories/pokemon_repository.dart';
 
 part 'home_state.dart';
@@ -12,7 +12,16 @@ class HomeCubit extends Cubit<HomeState> {
   final PokemonRepository _pokemonRepository;
 
   init() async {
+    emit(LoadingHomeState());
     final pokemonList = await _pokemonRepository.fetch();
-    emit(LoadedHomeState(pokemonList));
+    final pokemonTypeList = await _pokemonRepository.fetchTypes();
+    emit(LoadedHomeState(pokemonList: pokemonList, pokemonTypeList: pokemonTypeList));
+  }
+
+  getPokemonListFromType(String urlType) async {
+    final pokemonTypeList = (state as LoadedHomeState).pokemonTypeList;
+    emit(LoadingHomeState());
+    final pokemonList = await _pokemonRepository.fetchPokemonListByType(urlType);
+    emit(LoadedHomeState(pokemonList: pokemonList, pokemonTypeList: pokemonTypeList));
   }
 }
