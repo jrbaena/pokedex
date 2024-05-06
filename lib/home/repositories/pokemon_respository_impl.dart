@@ -38,15 +38,24 @@ class PokemonRepositoryImpl extends PokemonRepository {
 
   @override
   Future<List<PokemonTypeItem>> fetchTypes() async {
-    List<PokemonTypeItem> pokemonItemList = [];
+    List<PokemonTypeItem> pokemonTypeItemList = [];
     var url = Uri.parse(Config.typesUrl);
     var response = await http.get(url);
     if (response.statusCode == 200) {
       final results = jsonDecode(response.body)['results'];
-      pokemonItemList = results
+      pokemonTypeItemList = results
           .map<PokemonTypeItem>((value) => PokemonTypeItem.fromJson(value))
           .toList();
-      return pokemonItemList;
+      String? next = jsonDecode(response.body)['next'];
+      try {
+        var urlNext = Uri.parse(next!);
+        var responseNext = await http.get(urlNext);
+        final resultsNext = jsonDecode(responseNext.body)['results'];
+        pokemonTypeItemList.addAll(resultsNext
+            .map<PokemonTypeItem>((value) => PokemonTypeItem.fromJson(value))
+            .toList());
+      } catch (_) {}
+      return pokemonTypeItemList;
     } else {
       throw Exception();
     }
