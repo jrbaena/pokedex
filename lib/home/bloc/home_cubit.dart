@@ -30,10 +30,14 @@ class HomeCubit extends Cubit<HomeState> {
   getPokemonListFromType(PokemonTypeItem pokemonTypeSelected) async {
     final pokemonTypeList = (state as LoadedHomeState).pokemonTypeList;
     emit(LoadingHomeState(type: pokemonTypeSelected.name));
-    final pokemonList =
-        await _pokemonRepository.fetchPokemonListByType(pokemonTypeSelected.url);
+    final pokemonList = await _pokemonRepository
+        .fetchPokemonListByType(pokemonTypeSelected.url);
     emit(LoadedHomeState(
-        pokemonList: pokemonList, pokemonTypeList: pokemonTypeList, isRequested: false));
+      pokemonList: pokemonList,
+      pokemonTypeList: pokemonTypeList,
+      isRequested: false,
+      isFilteringByType: true,
+    ));
   }
 
   void next() async {
@@ -48,6 +52,8 @@ class HomeCubit extends Cubit<HomeState> {
         await _pokemonRepository.fetch(nextUrlToLoad: nextUrl);
     currentPokemonList.addAll(pokemonListItem.pokemonDetailList);
     emit((state as LoadedHomeState).copyWith(
-        pokemonList: currentPokemonList, nextUrl: pokemonListItem.nextUrl, isRequested: false));
+        pokemonList: currentPokemonList,
+        nextUrl: pokemonListItem.nextUrl,
+        isRequested: false));
   }
 }

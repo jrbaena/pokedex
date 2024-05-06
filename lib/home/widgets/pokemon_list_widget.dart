@@ -11,7 +11,6 @@ class PokemonListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final homeCubit = BlocProvider.of<HomeCubit>(context);
-    bool mustShowLoaderPagination = false;
 
     return BlocBuilder<HomeCubit, HomeState>(
       bloc: homeCubit,
@@ -29,11 +28,13 @@ class PokemonListWidget extends StatelessWidget {
         if (state is LoadedHomeState) {
           final pokemonList = state.pokemonList;
           bool isRequested = state.isRequested;
+          bool isFilteringByType = state.isFilteringByType;
+
           return NotificationListener(
             onNotification: (ScrollNotification scrollNotification) {
               if (scrollNotification.metrics.pixels ==
                       scrollNotification.metrics.maxScrollExtent &&
-                  !isRequested) {
+                  !isRequested && !isFilteringByType) {
                 homeCubit.next();
                 isRequested = true;
                 return true;
