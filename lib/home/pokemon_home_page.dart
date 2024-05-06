@@ -5,14 +5,14 @@ import 'package:pokedex/home/repositories/pokemon_respository_impl.dart';
 import 'package:pokedex/home/widgets/pokemon_appbar_widget.dart';
 import 'package:pokedex/home/widgets/pokemon_list_widget.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class PokemonHomePage extends StatefulWidget {
+  const PokemonHomePage({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<PokemonHomePage> createState() => _PokemonHomePageState();
 }
 
-class _HomeState extends State<Home> {
+class _PokemonHomePageState extends State<PokemonHomePage> {
   late final HomeCubit _homeCubit;
 
   @override

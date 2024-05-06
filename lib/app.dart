@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pokedex/home/home.dart';
+import 'package:pokedex/home/pokemon_home_page.dart';
 import 'home/repositories/pokemon_respository_impl.dart';
 
 class App extends StatelessWidget {
@@ -16,7 +16,7 @@ class App extends StatelessWidget {
         useMaterial3: true,
       ),
       home: RepositoryProvider(
-          create: (context) => PokemonRepositoryImpl(), child: const Home()),
+          create: (context) => PokemonRepositoryImpl(), child: const PokemonHomePage()),
     );
   }
 }
