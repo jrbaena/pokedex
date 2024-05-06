@@ -10,7 +10,7 @@ class PokemonListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final homeCubit = BlocProvider.of<HomeCubit>(context);
-    homeCubit.init();
+    bool isRequested = false;
 
     return BlocBuilder<HomeCubit, HomeState>(
       bloc: homeCubit,
@@ -27,62 +27,74 @@ class PokemonListWidget extends StatelessWidget {
         }
         if (state is LoadedHomeState) {
           final pokemonList = state.pokemonList;
-          return ListView.builder(
-            itemCount: pokemonList.length,
-            itemBuilder: (context, index) {
-              final pokemon = pokemonList[index];
-              return InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            PokemonDetailPage(pokemon: pokemon)),
-                  );
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CachedNetworkImage(
-                        imageUrl: pokemon.frontProfileImage,
-                        width: 60,
-                        height: 60,
-                        placeholder: (context, url) => const SizedBox(
-                            height: 15,
-                            width: 15,
-                            child: Center(child: CircularProgressIndicator())),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
-                      ),
-                      const SizedBox(
-                        width: 25,
-                      ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            Text(
-                              pokemon.name,
-                              style: const TextStyle(
-                                  color: Colors.black, fontSize: 18),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            const Divider(),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              );
+          return NotificationListener(
+            onNotification: (ScrollNotification scrollNotification) {
+              if (scrollNotification.metrics.pixels ==
+                  scrollNotification.metrics.maxScrollExtent &&
+                  !isRequested) {
+                homeCubit.next();
+                isRequested = true;
+                return true;
+              }
+              return false;
             },
+            child: ListView.builder(
+              itemCount: pokemonList.length,
+              itemBuilder: (context, index) {
+                final pokemon = pokemonList[index];
+                return InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              PokemonDetailPage(pokemon: pokemon)),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CachedNetworkImage(
+                          imageUrl: pokemon.frontProfileImage,
+                          width: 60,
+                          height: 60,
+                          placeholder: (context, url) => const SizedBox(
+                              height: 15,
+                              width: 15,
+                              child: Center(child: CircularProgressIndicator())),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                        ),
+                        const SizedBox(
+                          width: 25,
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              Text(
+                                pokemon.name,
+                                style: const TextStyle(
+                                    color: Colors.black, fontSize: 18),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              const Divider(),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
           );
         }
         return Container();

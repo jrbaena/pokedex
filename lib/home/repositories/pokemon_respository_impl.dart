@@ -10,8 +10,8 @@ import 'pokemon_repository.dart';
 
 class PokemonRepositoryImpl extends PokemonRepository {
   @override
-  Future<List<PokemonDetailItem>> fetch() async {
-    var url = Uri.parse(Config.baseUrl);
+  Future<List<PokemonDetailItem>> fetch({String? nextUrl}) async {
+    var url = nextUrl != null && nextUrl.isEmpty ? Uri.parse(nextUrl) : Uri.parse(Config.baseUrl);
     var response = await http.get(url);
     if (response.statusCode == 200) {
       final results = jsonDecode(response.body)['results'];

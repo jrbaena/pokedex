@@ -12,16 +12,19 @@ class LoadedHomeState extends HomeState {
   //copy with para ir copiando el estado loaded añadiendo más pokemons (paginación)
   final List<PokemonDetailItem> pokemonList;
   final List<PokemonTypeItem>? pokemonTypeList;
+  final String? nextUrl;
 
-  LoadedHomeState({required this.pokemonList, this.pokemonTypeList});
+  LoadedHomeState({required this.pokemonList, this.pokemonTypeList, this.nextUrl});
 
   LoadedHomeState copyWith({
     List<PokemonDetailItem>? pokemonList,
     List<PokemonTypeItem>? pokemonTypeList,
+    String? nextUrl,
   }) {
     return LoadedHomeState(
       pokemonList: pokemonList ?? this.pokemonList,
       pokemonTypeList: pokemonTypeList ?? this.pokemonTypeList,
+      nextUrl: nextUrl ?? this.nextUrl,
     );
   }
 }
