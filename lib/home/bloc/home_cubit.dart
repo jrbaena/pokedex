@@ -28,7 +28,10 @@ class HomeCubit extends Cubit<HomeState> {
     init();
   }
 
-  getPokemonListFromType(PokemonTypeItem pokemonTypeSelected) async {
+  getPokemonListFromType(PokemonTypeItem? pokemonTypeSelected) async {
+    if (pokemonTypeSelected == null) {
+      return;
+    }
     final pokemonTypeList = (state as LoadedHomeState).pokemonTypeList;
     emit(LoadingHomeState(type: pokemonTypeSelected.name));
     final pokemonList = await _pokemonRepository

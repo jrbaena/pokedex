@@ -39,7 +39,7 @@ class PokemonAppBarWidget extends StatelessWidget
             IconButton(
               onPressed: homeCubit.state is LoadedHomeState
                   ? () async {
-                      final PokemonTypeItem pokemonTypeSelected =
+                      final PokemonTypeItem? pokemonTypeSelected =
                           await showDialog(
                         context: context,
                         builder: (BuildContext context) {
@@ -54,7 +54,7 @@ class PokemonAppBarWidget extends StatelessWidget
                       homeCubit.getPokemonListFromType(pokemonTypeSelected);
                     }
                   : () {},
-              icon: const Icon(Icons.wifi),
+              icon: const Icon(Icons.filter_list_outlined),
               padding: const EdgeInsets.only(right: 16.0),
             )
           ],

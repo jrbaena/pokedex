@@ -14,7 +14,14 @@ class PokemonListWidget extends StatelessWidget {
     return BlocBuilder<HomeCubit, HomeState>(
       bloc: homeCubit,
       builder: (context, state) {
-        if (state is ErrorHomeState) {}
+        if (state is ErrorHomeState) {
+          return const Center(
+            child: Text(
+              'Ha habido un error',
+              style: TextStyle(fontSize: 28, color: Colors.red),
+            ),
+          );
+        }
         if (state is LoadingHomeState) {
           return const Center(
             child: SizedBox(
